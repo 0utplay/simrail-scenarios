@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TimeTableStorage xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TrainName>Pasażerski</TrainName>
+  <TrainNumber>40665</TrainNumber>
+  <LineNumber>Nr. 1</LineNumber>
+  <From>Dąbrowa Górnicza</From>
+  <To>Sosnowiec Główny</To>
+  <WayPoints>
+    <WayPointFromXml>
+		<NameOfPoint>Dąbrowa Górnicza</NameOfPoint>
+		<DisplayName>Dąbrowa Górnicza</DisplayName>
+		<StopType>commercialStop</StopType>
+		<Line>1</Line>
+		<Mileage>295.4</Mileage>
+		<ArrivalTime>0</ArrivalTime>
+		<DepartureTime>0</DepartureTime>
+		<TrainType>ROJ</TrainType>
+		<StationCategory>B</StationCategory>
+	</WayPointFromXml>
+  	<WayPointFromXml>
+		<NameOfPoint>Będzin</NameOfPoint>
+		<DisplayName>Będzin</DisplayName>
+		<StopType>commercialStop</StopType>
+		<Line>1</Line>
+		<Mileage>295.4</Mileage>
+		<ArrivalTime>0</ArrivalTime>
+		<DepartureTime>0</DepartureTime>
+		<TrainType>ROJ</TrainType>
+		<StationCategory>B</StationCategory>
+	</WayPointFromXml>
+	<WayPointFromXml>
+		<NameOfPoint>Sosnowiec Główny</NameOfPoint>
+		<DisplayName>Sosnowiec Główny</DisplayName>
+		<StopType>commercialStop</StopType>
+		<Line>1</Line>
+		<Mileage>292.9</Mileage>
+		<ArrivalTime>300</ArrivalTime>
+		<DepartureTime>320</DepartureTime>
+		<TrainType>ROJ</TrainType>
+		<StationCategory>B</StationCategory>
+	</WayPointFromXml>
+  </WayPoints>
+  <StartSpeedLimit>120</StartSpeedLimit>
+  <StartGlobalSpeedLimit>120</StartGlobalSpeedLimit>
+  <StartRadioChannels>
+    <int>2</int>
+  </StartRadioChannels>
+</TimeTableStorage>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SceneryManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <UID>7e5b94a2-3b2f-49a1-b3c7-dac950cb01d3</UID>
+  <SceneName>WorldStreamerPlayer</SceneName>
+  <ThumbnailFile>Thumbnail.png</ThumbnailFile>
+  <ThumbnailText>ThumbnailTextKey</ThumbnailText>
+  <MapFile>Map.png</MapFile>
+  <LocationNameHeader>HeaderText</LocationNameHeader>
+  <LocationName>LocationNameKey</LocationName>
+  <Description>SceneryDescriptionKey</Description>
+  <CustomTranslations>
+    <CustomTranslation Key="ThumbnailTextKey">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Thumbnail text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Thumbnail text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Thumbnail  text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Thumbnail text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Thumbnail text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Thumbnail text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Thumbnail text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Thumbnail text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Thumbnail text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Thumbnail text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Thumbnail text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+    <CustomTranslation Key="HeaderText">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Header text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Header text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Header text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Header text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Header text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Header text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Header text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Header text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Header text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Header text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Header text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+    <CustomTranslation Key="LocationNameKey">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Location name text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Location name text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Location name text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Location name text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Location name text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Location name  text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Location name text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Location name text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Location name text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Location name text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Location name text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+    <CustomTranslation Key="SceneryDescriptionKey">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Scenery description text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Scenery description in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Scenery description in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Scenery description in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Scenery description in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Scenery description in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Scenery description in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Scenery description in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Scenery description in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Scenery description in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Scenery description in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+  </CustomTranslations>
+</SceneryManifest>

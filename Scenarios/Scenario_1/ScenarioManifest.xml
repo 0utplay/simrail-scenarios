@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScenarioManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Required_Level>1</Required_Level>
+  <Train_Type>Cargo</Train_Type>
+  <Scenario_Name>SceneryNameText</Scenario_Name>
+  <Train_Engine_Names>
+    <string>E186</string>
+  </Train_Engine_Names>
+  <Train_Car_Names />
+  <Scenario_Start_Time>2021-06-05T19:00:00</Scenario_Start_Time>
+  <Scenario_Lenght>30</Scenario_Lenght>
+  <Difficulty>1</Difficulty>
+  <TrackLenghtInMeters>2000</TrackLenghtInMeters>
+  <SeasonOfTheYear>Summer</SeasonOfTheYear>
+  <HeaderText>HeaderText</HeaderText>
+  <SubHeaderText>SubHeaderText</SubHeaderText>
+  <MapFile>Map.png</MapFile>
+  <MainThumbnailPath>{Vehicle_Thumbnails}/E186-134.png</MainThumbnailPath>
+  <MiniThumbnailPath1>minithumbnails/minithumbnail1.png</MiniThumbnailPath1>
+  <MiniThumbnailPath2>minithumbnails/minithumbnail2.png</MiniThumbnailPath2>
+  <MiniThumbnailPath3>minithumbnails/minithumbnail3.png</MiniThumbnailPath3>
+  <Description>ScenarioDescription</Description>
+  <MissionFile>mission.lua</MissionFile>
+  <TimeTableFile>timetable.xml</TimeTableFile>
+  <CustomTranslations>
+    <CustomTranslation Key="SceneryNameText">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Scenery name text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Scenery name text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Scenery name  text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Scenery name text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Scenery name text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Scenery name text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Scenery name text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Scenery name text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Scenery name text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Scenery name text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Scenery name text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+        <CustomTranslation Key="HeaderText">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Header text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Header text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Header  text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Header text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Header text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Header text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Header text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Header text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Header text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Header text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Header text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+        <CustomTranslation Key="SubHeaderText">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Sub header text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Sub header text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Sub header text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Sub header text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Sub header text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Sub header text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Sub header text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Sub header text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Sub header text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Sub header text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Sub header text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+        <CustomTranslation Key="ScenarioDescription">
+      <Translations>
+        <CustomTranslationEntry LanguageTag="en">Scenario description text in English</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="fr">Scenario description text in French</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="de">Scenario description text in German</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="pl">Scenario description text in Polish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="it">Scenario description text in Italian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="ru">Scenario description text in Russian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="es">Scenario description text in Spanish</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="cs">Scenario description text in Czech</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="hu">Scenario description text in Hungarian</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-TW">Scenario description text in Traditional Chinese</CustomTranslationEntry>
+        <CustomTranslationEntry LanguageTag="zh-CN">Scenario description text in Simplified Chinese</CustomTranslationEntry>
+      </Translations>
+    </CustomTranslation>
+  </CustomTranslations>
+</ScenarioManifest>
