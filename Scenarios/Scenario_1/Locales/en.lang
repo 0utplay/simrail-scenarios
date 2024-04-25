@@ -1,8 +1,1 @@
-LuaText=Hello there
-LuaText2=Ah, a lua mission!
-
-CallTheStationToEnter=Call station dispatcher.
-EnterTheStationIgnoringStopSignal=Enter the station ignoring stop signal.
-
-NowExitVehicle=Now, exit the vehicle.
-EnterOtherTrainset=Enter to the other train.
+StateVdLoading=The scenario is loading. This may take some time, please be patient...
