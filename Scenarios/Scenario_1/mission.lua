@@ -3,6 +3,7 @@
 -- Version: 1.0
 --
 require("SimRailCore")
+require("AiTrainUtils")
 
 -- =============================
 --    SimRail Information
@@ -45,6 +46,10 @@ PlayerController = nil
 --- The reference to the player trainset.
 ---@type TrainsetInfo
 PlayerTrainset = nil
+
+--- The camera that should be forced on the player, nil to not force any camera
+---@type CameraView|nil
+ForcedCameraView = nil
 
 -- =============================
 --    SimRail Event Listeners
@@ -91,6 +96,11 @@ end
 
 --- Function called by SimRail each frame.
 function PerformUpdate()
+    -- Ensure that the player is in the forced camera
+    if ForcedCameraView ~= nil and GetCameraView() ~= ForcedCameraView then
+        SetCameraView(ForcedCameraView)
+    end
+
     -- Check for initial dispatcher loading state, if currently active move the camera of the player forward (start cutscene)
     if CurrentScenarioState == ScenarioState.WaitingForVdInitialization then
         PlayerController.transform.position = (PlayerController.transform.position + Vector3Create(0.03, 0, 0.01))
@@ -218,7 +228,6 @@ end
 --    Mission Related Stuff
 -- =============================
 --- Sets the initial shunting routes in Zachodnia
---- Visualization: https://brouter.de/brouter-web/#map=15/52.2195/20.9390/osm-mapnik-german_style&lonlats=20.961442,52.221385;20.948353,52.217323;20.944005,52.21599&profile=rail
 function SetRoutesShuntingWzdInitial()
     VDSetRoute("WZD_S1G", "WZD_Tm213", VDOrderType.ManeuverRoute)
     VDSetRoute("WZD_Tm213", "WCz_H", VDOrderType.ManeuverRoute)
@@ -226,8 +235,8 @@ function SetRoutesShuntingWzdInitial()
 end
 
 --- Sets shunting route from first step in Zachodnia to entry signal
---- Visualization: https://brouter.de/brouter-web/#map=18/52.21685/20.94556/osm-mapnik-german_style&lonlats=20.944005,52.21599;20.954028,52.21818&profile=rail
 function SetRoutesShutningWzdBeforeEnter()
+    Test()
     VDSetRoute("WCz_Tm10", "WZD_S201", VDOrderType.ManeuverRoute)
 
     -- spawns a pendolino which enters the station on track 6 / peron 5
@@ -239,17 +248,20 @@ function SetRoutesShutningWzdBeforeEnter()
     -- spawns a dummy train that just stands in zachodnia
     SpawnAiTrainsetAtSignal(FindSignal("WZD_R610"), 10, false, {
         CreateNewSpawnVehicleDescriptor(LocomotiveNames.ET22_256, false),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5349_475_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5349_475_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
-        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, "", 80, BrakeRegime.P),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, FreightLoads_412W_v4.Coal, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, FreightLoads_412W_v4.Coal, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5349_475_9, false, FreightLoads_412W_v4.Coal, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5349_475_9, false, FreightLoads_412W_v4.Coal, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.EAOS_3151_5351_989_9, false, FreightLoads_412W_v4.Coal, 80, BrakeRegime.G),
+
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.Zaes_3351_0079_375_1, false, FreightLoads_406Ra.Petrol, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.Zaes_3351_0079_375_1, false, FreightLoads_406Ra.Petrol, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.Zaes_3351_0079_375_1, false, FreightLoads_406Ra.Petrol, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.Zaes_3351_0079_375_1, false, FreightLoads_406Ra.Petrol, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.Zaes_3351_0079_375_1, false, FreightLoads_406Ra.Petrol, 80, BrakeRegime.G),
+
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.SGS_3151_3944_773_6, false, FreightLoads_412W.RandomContainerAll, 80, BrakeRegime.G),
+        CreateNewSpawnFullVehicleDescriptor(FreightWagonNames.SGS_3151_3944_773_6, false, FreightLoads_412W.RandomContainerAll, 80, BrakeRegime.G),
     })
 
     -- spawns an ET22 with regio train attached, which enters zachodnia on track 25 / peron 4
@@ -283,7 +295,6 @@ function SetRoutesShutningWzdBeforeEnter()
 end
 
 -- Sets the train routes through Wzd towards Wzc via regional tracks
---- Visualization:
 function SetRoutesTrainWzdToWdc()
     VDSetRoute("WZD_S201", "WZD_G1", VDOrderType.TrainRoute)
     VDSetRoute("WZD_G1", "WZD_Ekps", VDOrderType.TrainRoute)
