@@ -236,7 +236,6 @@ end
 
 --- Sets shunting route from first step in Zachodnia to entry signal
 function SetRoutesShutningWzdBeforeEnter()
-    Test()
     VDSetRoute("WCz_Tm10", "WZD_S201", VDOrderType.ManeuverRoute)
 
     -- spawns a pendolino which enters the station on track 6 / peron 5
