@@ -71,9 +71,6 @@ function EarlyScenarioStart()
     SetDateTime(DateTimeCreate(2024, 06, 12, 03, 30, 00))
     SetWeather(WeatherConditionCode.ScatteredClouds, 3, 1000, 42, 200, 0, 13, 0, true)
 
-    DisplayChatText("a")
-    DisplayChatText(DragonTrainset.locomotive)
-    DisplayChatText("b")
     PlayerController = GetPlayerController()
 
     -- Display the setup for the locomotive to use
