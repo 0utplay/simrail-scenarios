@@ -25,18 +25,18 @@ local function DisplayNextStep(step, callback)
     local options = {}
     for optionIndex = 1, #step.results do
         local optionMessageKey = "Setup_" .. step.key .. "_option_" .. tostring(optionIndex)
-        options[optionIndex] = {
-            Text = optionMessageKey,
-            OnClick = function()
+        table.insert(options, {
+            ["Text"] = optionMessageKey,
+            ["OnClick"] = function()
                 local stepResult = step.results[optionIndex]
                 callback(stepResult)
-            end
-        }
+            end,
+        })
     end
 
     -- display a message box that allows for selection of the options
     local stepMessageKey = "Setup_" .. step.key
-    ShowMessageBox(stepMessageKey, options)
+    ShowMessageBox(stepMessageKey, table.unpack(options))
 end
 
 ---@param steps table<SetupStep> The setup steps to execute.
@@ -48,9 +48,10 @@ function ExecuteSetup(steps, callback)
         local step = steps[index]
         DisplayNextStep(step, function(result)
             results[step.key] = result
+            if index == #steps then
+                -- call the callback with the collected results
+                callback(results)
+            end
         end)
     end
-
-    -- call the callback with the collected results
-    callback(results)
 end

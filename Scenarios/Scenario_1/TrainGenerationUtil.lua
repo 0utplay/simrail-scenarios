@@ -301,18 +301,23 @@ end
 --- Contructs a freight trainset to spawn based on the given input parameters
 ---@param maxLength integer The maximum length of the train to construct, in meters.
 ---@param maxWagonCount integer The maximum count of wagons to append to the train, must be positive (can be 0).
+---@param prependLocomotive boolean If a locomotive should be prepended to the trainset.
 ---@param reversed boolean If the wagons and locomotive should be spawned reversed.
 ---@return table<SpawnVehicleDescription>
-local function ConstructFreightTrain(maxLength, maxWagonCount, reversed)
+local function ConstructFreightTrain(maxLength, maxWagonCount, prependLocomotive, reversed)
     -- The resulting constructed trainset
     local result = {}
 
     -- Pick a locomotive for the trainset first
-    local locomotive = PickRandomElement(FreightLocomotives)
-    table.insert(result, CreateNewSpawnFullVehicleDescriptor(locomotive.locomotiveName, reversed, "", 0, BrakeRegime.G))
+    local currentLength = 0
+    if prependLocomotive then
+        local locomotive = PickRandomElement(FreightLocomotives)
+        currentLength = locomotive.length
+        table.insert(result, CreateNewSpawnFullVehicleDescriptor(locomotive.locomotiveName, reversed, "", 0, BrakeRegime.G))
+    end
 
-    -- Register X freight wagons to the spawned trainset 
-    local currentLength = locomotive.length
+    -- Register X freight wagons to the spawned trainset
+    local wagonCount = 0
     for _ = 1, maxWagonCount do
         -- Pick a random wagon, break train construction if adding it would exceed the given maximum size
         local randomWagon = PickRandomElement(FreigthWagons)
@@ -321,16 +326,23 @@ local function ConstructFreightTrain(maxLength, maxWagonCount, reversed)
             break
         end
 
+        -- Wagons >5 seem to be in brake regime P instead of G, apply that
+        wagonCount = wagonCount + 1
+        local brakeRegime = BrakeRegime.G
+        if wagonCount > 5 then
+            brakeRegime = BrakeRegime.P
+        end
+
         -- Pick a random freight & mass (in kilograms) for the wagon
         local possibleFreight = randomWagon.freightTypes
         local randomFreightMass = math.random(10, randomWagon.maxCargoWeight) * 1000
         if #possibleFreight > 0 then
             -- Wagon has freight that can be carried, pick a random one
             local randomeFreight = PickRandomElement(possibleFreight)
-            table.insert(result, CreateNewSpawnFullVehicleDescriptor(randomWagon.wagonName, reversed, randomeFreight, randomFreightMass, BrakeRegime.G))
+            table.insert(result, CreateNewSpawnFullVehicleDescriptor(randomWagon.wagonName, reversed, randomeFreight, randomFreightMass, brakeRegime))
         else
             -- Wagon has no freight that can be carried
-            table.insert(result, CreateNewSpawnFullVehicleDescriptor(randomWagon.wagonName, reversed, "", randomFreightMass, BrakeRegime.G))
+            table.insert(result, CreateNewSpawnFullVehicleDescriptor(randomWagon.wagonName, reversed, "", randomFreightMass, brakeRegime))
         end
     end
 
@@ -340,18 +352,22 @@ end
 --- Contructs a passenger trainset with locomotive to spawn based on the given input parameters
 ---@param maxLength integer The maximum length of the train to construct, in meters.
 ---@param maxWagonCount integer The maximum count of wagons to append to the train, must be positive (can be 0).
+---@param prependLocomotive boolean If a locomotive should be prepended to the trainset.
 ---@param reversed boolean If the wagons and locomotive should be spawned reversed.
 ---@return table<SpawnVehicleDescription>
-local function ConstructPassengerTrainWithLocomotive(maxLength, maxWagonCount, reversed)
+local function ConstructPassengerTrainWithLocomotive(maxLength, maxWagonCount, prependLocomotive, reversed)
     -- The resulting constructed trainset
     local result = {}
 
-    -- Pick a locomotive for the trainset first
-    local locomotive = PickRandomElement(PassengerLocomotives)
-    table.insert(result, CreateNewSpawnFullVehicleDescriptor(locomotive.locomotiveName, reversed, "", 0, BrakeRegime.P))
+    -- Pick a locomotive for the trainset first, if requested
+    local currentLength = 0
+    if prependLocomotive then
+        local locomotive = PickRandomElement(PassengerLocomotives)
+        currentLength = locomotive.length
+        table.insert(result, CreateNewSpawnFullVehicleDescriptor(locomotive.locomotiveName, reversed, "", 0, BrakeRegime.P))
+    end
 
     -- Register X passenger wagons to the spawned trainset 
-    local currentLength = locomotive.length
     for _ = 1, maxWagonCount do
         -- Pick a random wagon, break train construction if adding it would exceed the given maximum size
         local randomWagon = PickRandomElement(PassengerWagons)
@@ -436,14 +452,16 @@ end
 ---@param type TrainSpawnType The type of trainset to create.
 ---@param maxLength integer A positive integer that sets the maximum length of the trainset to spawn (in meters).
 ---@param maxUnitCount integer A positive integer that sets the maximum count of vehicles to spawn.
+---@param prependLocomotive boolean|nil If the trainset should be prepended with a locomotive. Defaults to true, has no effect for emus.
 ---@param reversed boolean|nil If the trainset should be spawned in reverse. Defaults to false.
 ---@return table<SpawnVehicleDescription>
-function CreateTrainset(type, maxLength, maxUnitCount, reversed)
+function CreateTrainset(type, maxLength, maxUnitCount, prependLocomotive, reversed)
     local reverse = reversed ~= nil and reversed
+    local prependLoco = prependLocomotive ~= nil and prependLocomotive
     if type == TrainSpawnType.Freight then
-        return ConstructFreightTrain(maxLength, maxUnitCount, reverse)
+        return ConstructFreightTrain(maxLength, maxUnitCount, prependLoco, reverse)
     elseif type == TrainSpawnType.Passenger_Locomotive then
-        return ConstructPassengerTrainWithLocomotive(maxLength, maxUnitCount, reverse)
+        return ConstructPassengerTrainWithLocomotive(maxLength, maxUnitCount, prependLoco, reverse)
     elseif type == TrainSpawnType.Passenger_Emu then
         return ConstructPassengerTrainEmu(ElectricalMultipleUnits, maxLength, maxUnitCount, reverse)
     elseif type == TrainSpawnType.Passenger_Pendolino then

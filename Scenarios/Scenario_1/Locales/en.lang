@@ -1,1 +1,5 @@
 StateVdLoading=The scenario is loading. This may take some time, please be patient...
+
+Setup_locomotive=Please select a locomotive that you would like to use for the scenario:
+Setup_locomotive_option_1=Dragon
+Setup_locomotive_option_2=ET22

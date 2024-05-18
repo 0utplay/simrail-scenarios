@@ -3,7 +3,10 @@
 -- Version: 1.0
 --
 require("SimRailCore")
-require("AiTrainUtils")
+
+require("Setup")
+require("MissionTrainsets")
+require("TrainGenerationUtil")
 
 -- =============================
 --    SimRail Information
@@ -47,6 +50,10 @@ PlayerController = nil
 ---@type TrainsetInfo
 PlayerTrainset = nil
 
+--- The trainset that was selected by the player to be used.
+---@type MissionTrainset
+MissionTrainset = nil
+
 --- The camera that should be forced on the player, nil to not force any camera
 ---@type CameraView|nil
 ForcedCameraView = nil
@@ -64,20 +71,17 @@ function EarlyScenarioStart()
     SetDateTime(DateTimeCreate(2024, 06, 12, 03, 30, 00))
     SetWeather(WeatherConditionCode.ScatteredClouds, 3, 1000, 42, 200, 0, 13, 0, true)
 
+    DisplayChatText("a")
+    DisplayChatText(DragonTrainset.locomotive)
+    DisplayChatText("b")
     PlayerController = GetPlayerController()
 
-    -- Spawns player trainset
-    local InitialStartSignal = FindSignal("WZD_S1G")
-    local InitialTrainset = { CreateNewSpawnVehicleDescriptor(LocomotiveNames.ET22_836, false) }
-    PlayerTrainset = SpawnTrainsetOnSignal("PlayerTrainset", InitialStartSignal, 12, true, true, false, false, InitialTrainset)
-    if DeveloperMode() then
-        -- Shortcut for development reasons, just mark the trainset as ready
-        PlayerTrainset.SetState(DynamicState.dsStop, TrainsetState.tsShunting, true)
-        PlayerTrainset.SetRadioChannel(PlayerTrainset.GetIntendedRadioChannel(), true)
-    else
-        -- Mark the trainset as cold start, require the player to set it up
-        PlayerTrainset.SetState(DynamicState.dsCold, TrainsetState.tsDeactivation, true)
-    end
+    -- Display the setup for the locomotive to use
+    local locomotiveSetupStep = SetupStep.new("locomotive", {DragonTrainset, Et22Trainset})
+    ExecuteSetup({locomotiveSetupStep}, function(results)
+        MissionTrainset = results["locomotive"]
+        SpawnPlayerTrainSet()
+    end)
 end
 
 --- Function called by SimRail when the loading finishes. After calling this mission recorder is started and stuff gets registered
@@ -177,8 +181,7 @@ function OnVirtualDispatcherReady()
         PlayerController.transform.parent.localPosition = RelativeTeleportTarget
 
         -- let the player look towards the trainset door & change camera to let him walk around freely
-        local DoorTransformPath = "Chassis/ChassisBujanie/INTERIOR/ET22_kabina A/drzwi_kabina_r_handler/drzwi_kabina_r"
-        local SuspectedEntryDoor = PlayerTrainset.transform.GetChild(0).Find(DoorTransformPath)
+        local SuspectedEntryDoor = PlayerTrainset.transform.GetChild(0).Find(MissionTrainset.doorTransform)
         CameraTurnTowards(SuspectedEntryDoor.position, false)
         SetCameraView(CameraView.FirstPersonWalkingOutside)
     end
@@ -227,6 +230,22 @@ end
 -- =============================
 --    Mission Related Stuff
 -- =============================
+--- Spawns the player trainset after the player decided which one to use.
+function SpawnPlayerTrainSet()
+    -- Spawns player trainset
+    local InitialStartSignal = FindSignal("WZD_S1G")
+    local InitialTrainset = { CreateNewSpawnVehicleDescriptor(MissionTrainset.locomotive, false) }
+    PlayerTrainset = SpawnTrainsetOnSignal("PlayerTrainset", InitialStartSignal, 12, true, true, false, false, InitialTrainset)
+    if DeveloperMode() then
+        -- Shortcut for development reasons, just mark the trainset as ready
+        PlayerTrainset.SetState(DynamicState.dsStop, TrainsetState.tsShunting, true)
+        PlayerTrainset.SetRadioChannel(PlayerTrainset.GetIntendedRadioChannel(), true)
+    else
+        -- Mark the trainset as cold start, require the player to set it up
+        PlayerTrainset.SetState(DynamicState.dsCold, TrainsetState.tsDeactivation, true)
+    end
+end
+
 --- Sets the initial shunting routes in Zachodnia
 function SetRoutesShuntingWzdInitial()
     VDSetRoute("WZD_S1G", "WZD_Tm213", VDOrderType.ManeuverRoute)
